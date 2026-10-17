@@ -1,0 +1,30 @@
+{
+  "id": "sudo",
+  "name": "Sudo",
+  "description": "A curated product workflow with planning, implementation, review, verification, release and prose skills.",
+  "version": "0.1.0",
+  "activation": {
+    "onStartup": true
+  },
+  "skills": [
+    "skills"
+  ],
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "enabled": {
+        "type": "boolean"
+      },
+      "agents": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "release": {
+        "type": "string"
+      }
+    }
+  }
+}

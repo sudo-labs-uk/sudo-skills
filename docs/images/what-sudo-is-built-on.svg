@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 980" width="1400" height="980" role="img"
+     aria-label="sudo drawn as a grafted fruit tree. The assumed stack is the soil. A skill flow copied at a pinned commit is the rootstock. Five third-party skills are grafted onto it. Filled buds are carried here, while open buds are referenced separately and their future home is undecided. A dashed arrow marks the planned fork sync.">
+  <title>What sudo is built on</title>
+  <defs>
+    <marker id="ar" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L 12 6 L 0 12 z" fill="#4E7391"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1400" height="980" fill="#F7F4ED"/>
+
+  <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="32" font-weight="700" fill="#23201C" x="60" y="58">What sudo is built on</text>
+  <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="17" fill="#5C564E" x="60" y="88">One rootstock, five grafts, carried and separately referenced buds, and the ground beneath them.</text>
+
+  <g transform="translate(0,124)">
+    <rect x="60" y="-11" width="15" height="15" rx="3" fill="#9C7A5C"/>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="14" fill="#3C3832" x="85" y="2">Soil &#8212; what every repo is assumed to have</text>
+    <rect x="400" y="-11" width="15" height="15" rx="3" fill="#6B4F36"/>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="14" fill="#3C3832" x="425" y="2">Rootstock &#8212; the pinned skill flow</text>
+    <rect x="680" y="-11" width="15" height="15" rx="3" fill="#B5651D"/>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="14" fill="#3C3832" x="705" y="2">Graft &#8212; a skill from another maker</text>
+    <circle cx="987" cy="-3.5" r="7.5" fill="#3F7A3A"/>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="14" fill="#3C3832" x="1005" y="2">Buds &#8212; carried here or referenced separately</text>
+  </g>
+
+  <!-- soil -->
+  <rect x="0" y="812" width="1400" height="168" fill="#8A6A4F"/>
+  <path d="M0 812 Q 200 804 400 812 T 800 812 T 1200 812 T 1400 812 L 1400 824 L 0 824 Z" fill="#9C7A5C"/>
+
+  <!-- roots -->
+  <g fill="none" stroke="#6B4F36" stroke-linecap="round">
+    <path d="M688 814 C 640 828 560 834 470 856" stroke-width="9"/>
+    <path d="M694 814 C 660 830 630 842 585 860" stroke-width="7"/>
+    <path d="M700 814 L 700 862" stroke-width="8"/>
+    <path d="M706 814 C 740 830 772 842 818 860" stroke-width="7"/>
+    <path d="M712 814 C 760 828 842 834 934 856" stroke-width="9"/>
+  </g>
+
+  <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#FFF4E6" letter-spacing="0.6" x="60" y="852">THE SOIL</text>
+  <g>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#FCF7EF" x="100" y="898">Linear</text>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" fill="#FFF4E6" x="100" y="920">where the spec goes</text>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#FCF7EF" x="380" y="898">GitHub issues</text>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" fill="#FFF4E6" x="380" y="920">where the tickets go</text>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#FCF7EF" x="680" y="898">Neon</text>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" fill="#FFF4E6" x="680" y="920">the database</text>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#FCF7EF" x="880" y="898">Clerk</text>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" fill="#FFF4E6" x="880" y="920">who the users are</text>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#FCF7EF" x="1080" y="898">secretdrop</text>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" fill="#FFF4E6" x="1080" y="920">how a machine gets</text>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" fill="#FFF4E6" x="1080" y="941">a secret</text>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#FCF7EF" x="1240" y="898">Impeccable</text>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" fill="#FFF4E6" x="1240" y="920">the design kit</text>
+  </g>
+
+  <!-- trunk -->
+  <path d="M672 814 C 668 720 676 600 682 500 C 686 448 688 420 688 400
+           L 712 400 C 712 420 714 448 718 500 C 724 600 732 720 728 814 Z" fill="#7A5A3C"/>
+  <path d="M684 782 C 688 680 694 570 698 470" fill="none" stroke="#6B4F36" stroke-width="3" opacity=".7"/>
+
+  <!-- canopy -->
+  <ellipse cx="700" cy="268" rx="292" ry="122" fill="#4F7A4A" opacity=".16"/>
+  <ellipse cx="700" cy="268" rx="292" ry="122" fill="none" stroke="#4F7A4A" stroke-width="2.5" opacity=".55"/>
+  <path d="M700 402 C 700 376 690 354 670 334" fill="none" stroke="#7A5A3C" stroke-width="9" stroke-linecap="round"/>
+  <path d="M700 402 C 700 376 712 354 734 334" fill="none" stroke="#7A5A3C" stroke-width="9" stroke-linecap="round"/>
+
+  <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#2A5A26" letter-spacing="0.6" x="700" y="188" text-anchor="middle">CARRIED HERE OR REFERENCED SEPARATELY</text>
+  <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" fill="#3E6B3A" x="700" y="210" text-anchor="middle">Filled buds are carried here. Open buds have no settled home in sudo.</text>
+  <g>
+    <circle cx="500" cy="236" r="7.5" fill="#3F7A3A"/><text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1F4A1C" x="518" y="242">sudo-setup</text>
+    <circle cx="500" cy="272" r="7.5" fill="#3F7A3A"/><text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1F4A1C" x="518" y="278">verify</text>
+    <circle cx="500" cy="308" r="7.5" fill="#3F7A3A"/><text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1F4A1C" x="518" y="314">audit</text>
+    <circle cx="770" cy="236" r="7.5" fill="#3F7A3A"/><text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1F4A1C" x="788" y="242">cut-release</text>
+    <circle cx="770" cy="272" r="7" fill="#F7F4ED" stroke="#3F7A3A" stroke-width="2.5"/><text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1F4A1C" x="788" y="278">agent-problem-solving</text>
+    <circle cx="770" cy="308" r="7" fill="#F7F4ED" stroke="#3F7A3A" stroke-width="2.5"/><text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1F4A1C" x="788" y="314">cairn</text>
+  </g>
+
+  <!-- branches -->
+  <g fill="none" stroke="#7A5A3C" stroke-width="8" stroke-linecap="round">
+    <path d="M676 700 C 610 696 520 680 448 652"/>
+    <path d="M722 640 C 788 636 878 620 950 592"/>
+    <path d="M682 578 C 616 572 526 554 452 530"/>
+    <path d="M716 516 C 782 510 872 492 946 468"/>
+    <path d="M688 456 C 630 442 558 424 500 400"/>
+  </g>
+  <!-- graft bands, sitting on each branch where it meets the trunk -->
+  <g stroke="#B5651D" stroke-width="10" stroke-linecap="butt">
+    <path d="M638 683 L 642 705"/>
+    <path d="M760 623 L 756 645"/>
+    <path d="M644 561 L 648 583"/>
+    <path d="M754 499 L 750 521"/>
+    <path d="M657 436 L 651 457"/>
+  </g>
+
+  <g>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#23201C" x="432" y="642" text-anchor="end">design-is</text>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" fill="#5C564E" x="432" y="665" text-anchor="end">a design review, from claude-mem</text>
+
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#23201C" x="966" y="582" text-anchor="start">pathfinder</text>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" fill="#5C564E" x="966" y="605" text-anchor="start">a map of the architecture, from claude-mem</text>
+
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#23201C" x="436" y="520" text-anchor="end">show-me</text>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" fill="#5C564E" x="436" y="543" text-anchor="end">draws the change, from HumanLayer</text>
+
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#23201C" x="962" y="458" text-anchor="start">humanizer</text>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" fill="#5C564E" x="962" y="481" text-anchor="start">takes the AI tells out, from Siqi Chen</text>
+
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#23201C" x="484" y="390" text-anchor="end">ce-noslop</text>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" fill="#5C564E" x="484" y="413" text-anchor="end">prose tests, from Compound Engineering</text>
+  </g>
+
+  <!-- rootstock -->
+  <g>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#23201C" x="415" y="748" text-anchor="end">The rootstock</text>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" fill="#5C564E" x="415" y="771" text-anchor="end">Matt Pocock&#8217;s skill flow, copied at a pinned commit.</text>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" fill="#5C564E" x="415" y="792" text-anchor="end">Everything above it grows on this.</text>
+    <path d="M425 758 L 668 758" fill="none" stroke="#7A5A3C" stroke-width="2" stroke-dasharray="5 5"/>
+  </g>
+
+  <!-- upstream sync -->
+  <g>
+    <path d="M1030 716 C 920 716 822 734 746 760" fill="none" stroke="#4E7391" stroke-width="3.5" stroke-dasharray="10 8" marker-end="url(#ar)"/>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#23201C" x="1046" y="710">Planned fork sync</text>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" fill="#5C564E" x="1046" y="733">Upstream changes will merge in</text>
+    <text font-family="Inter, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif" font-size="16" fill="#5C564E" x="1046" y="754">on a branch for review.</text>
+  </g>
+</svg>

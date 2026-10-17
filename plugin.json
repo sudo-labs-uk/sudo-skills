@@ -1,0 +1,8 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "sudo",
+  "version": "0.1.0",
+  "description": "A curated product workflow with planning, implementation, review, verification, release and prose skills.",
+  "license": "MIT",
+  "keywords": ["skills", "product-engineering", "spec", "tickets", "tdd", "design-review"]
+}

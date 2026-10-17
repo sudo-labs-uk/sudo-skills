@@ -1,0 +1,27 @@
+{
+  "name": "sudo-skills",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A curated product skill set, installed by linking rather than copying so an edit here reaches every configured agent.",
+  "license": "MIT",
+  "bin": {
+    "sudo-skills": "./bin/sudo-skills.mjs"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "files": [
+    ".claude-plugin",
+    "LICENSE",
+    "README.md",
+    "bin",
+    "docs",
+    "lib",
+    "openclaw.plugin.json",
+    "plugin.json",
+    "skills"
+  ],
+  "engines": {
+    "node": ">=20.11"
+  }
+}
