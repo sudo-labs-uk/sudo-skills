@@ -18,8 +18,8 @@ disable-model-invocation: true
 
 3. Work out the version. A breaking change to anything another repo or agent
    depends on is a major. A new capability is a minor. Everything else is a
-   patch. Say which one you picked and why, and get the user's agreement before
-   you tag.
+   patch. Say which one you picked and why, and confirm it with the user before
+   you tag: one question through the `ask` skill, your pick first.
 
 4. Write the notes as what changed for whoever uses this, grouped under Added,
    Changed, Fixed. One line each, no commit hashes, no internal refactors that

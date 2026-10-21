@@ -11,8 +11,9 @@ This skill is a vendored copy of third-party work.
 
 ## What Sudo Labs changed
 
-The `SKILL.md` is byte-identical to the upstream commit named above. Sudo Labs
-added this file, `LICENSE` and `NOTICE`, and nothing else.
+One line in Phase 0 of `SKILL.md` changed: scope questions go one at a time
+through sudo's `ask` skill. Otherwise `SKILL.md` is byte-identical to the upstream
+commit named above. Sudo Labs added this file, `LICENSE` and `NOTICE`.
 
 Note for a session: the skill hands off to `/make-plan` and `/review`, which
 are claude-mem's own commands and are not part of sudo. Treat the handoff as a

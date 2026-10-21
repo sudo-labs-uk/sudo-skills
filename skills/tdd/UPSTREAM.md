@@ -13,4 +13,4 @@ replaced by a merge from it; the commit above is the merge base.
 
 ## What Sudo Labs changed
 
-Nothing. The file is byte-identical to the upstream commit named above.
+One line changed: instead of asking the user for the interface and the seams, the agent proposes them and confirms them as one question through sudo's `ask` skill. Otherwise the file is byte-identical to the upstream commit named above.

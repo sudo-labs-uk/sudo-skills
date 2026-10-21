@@ -47,13 +47,13 @@ Present the proposed breakdown as a numbered list. For each ticket, show:
 - **Blocked by**: which other tickets (if any) must complete first
 - **What it delivers**: the end-to-end behaviour this ticket makes work
 
-Ask the user:
+Then ask the user these, one at a time through the `ask` skill, waiting for each answer:
 
-- Does the granularity feel right? (too coarse / too fine)
-- Are the blocking edges correct: does each ticket only depend on tickets that genuinely gate it?
-- Should any tickets be merged or split further?
+1. Does the granularity feel right? (too coarse / too fine)
+2. Are the blocking edges correct: does each ticket only depend on tickets that genuinely gate it?
+3. Should any tickets be merged or split further?
 
-Iterate until the user approves the breakdown.
+Skip a question the breakdown has already answered. When an answer changes the breakdown, show the new list and start again from question 1. Iterate until the user approves the breakdown.
 
 ### 5. Publish the tickets to GitHub
 

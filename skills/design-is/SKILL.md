@@ -58,7 +58,7 @@ All artifacts go in `DESIGN-IS-<YYYY-MM-DD>/` at repo root (or the project the u
 
 ### Phase 0: Scope Lock (ALWAYS FIRST)
 
-Ask the user (or infer from the request) and write `00-scope.md`:
+Ask the user (or infer from the request) and write `00-scope.md`. Ask only what you cannot infer, one question at a time through the `ask` skill:
 - What is being audited? (live URL, repo path, Figma frame, component name)
 - Who is the primary user, and what is the primary task?
 - Constraints (brand, stack, deadline)
