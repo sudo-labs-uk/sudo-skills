@@ -48,9 +48,12 @@ gateway config as two-space JSON, so a config in another layout comes back reind
 
 ## The skills
 
-Seven come from Matt Pocock's set (MIT): `grill-with-docs`, `to-spec`, `to-tickets`,
-`implement-spec`, `tdd`, `code-review`, `pr`. sudo's copies write specs to Linear
-and open tickets as GitHub issues that reference the spec.
+Ten come from Matt Pocock's set (MIT): `grill-with-docs` and the two skills it
+calls, `grilling` and `domain-modeling`, plus `to-spec`, `to-tickets`,
+`implement-spec`, `tdd` and the `codebase-design` vocabulary it calls, `code-review`
+and `pr`. sudo's copies write specs to Linear
+and open tickets as GitHub issues that reference the spec, and they ask the user one
+question at a time.
 
 Five are copied from other makers. `design-is` and `pathfinder` come from
 claude-mem (Apache-2.0), `show-me` from HumanLayer (MIT). Two more cover prose:
@@ -59,7 +62,9 @@ tests each sentence for clarity. The planned product-work sequence will require 
 passes before a spec, ticket, PR body or repository document is published. Each
 skill's `UPSTREAM.md` lists what sudo changed, if anything.
 
-Five are sudo's own: `sudo-setup` configures a repo's Linear team and GitHub repo
+Six are sudo's own. `ask` sets how every skill puts a question to the user: one
+question per turn, through `AskUserQuestion` in Claude Code and numbered buttons on
+Telegram. `sudo-setup` configures a repo's Linear team and GitHub repo
 once, `verify` drives the running app and screenshots what a user sees, `audit` checks
 a finished change against its ticket's acceptance criteria from a fresh session,
 `cut-release` tags and publishes, and `improve-skill` turns a lesson about any of
@@ -72,7 +77,7 @@ Impeccable, `agent-problem-solving` and `cairn` are installed separately. See
 
 Every vendored skill directory carries its upstream licence and an `UPSTREAM.md`
 naming the repo, the path, the commit it was taken at, and what sudo changed.
-The two Apache-2.0 skills also carry the upstream `NOTICE`. The seven Pocock skill
+The two Apache-2.0 skills also carry the upstream `NOTICE`. The ten Pocock skill
 directories record the commit that a future fork will use as its merge base.
 
 ## Tests

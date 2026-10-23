@@ -14,7 +14,7 @@ The spec tracker is Linear, and the ticket tracker is GitHub. The Linear team an
 
 2. Sketch out the seams at which you're going to test the feature. Existing seams should be preferred to new ones. Use the highest seam possible. If new seams are needed, propose them at the highest point you can. The fewer seams across the codebase, the better - the ideal number is one.
 
-Check with the user that these seams match their expectations.
+Check with the user that these seams match their expectations: one question, through the `ask` skill.
 
 3. Write the spec using the template below, then publish it to Linear as one issue in the configured team, following `docs/agents/issue-tracker.md`. A spec is the shape of the work and lives in Linear; the units of it become GitHub issues at `/to-tickets`. Apply the `ready-for-agent` triage label - no need for additional triage.
 

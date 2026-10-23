@@ -15,7 +15,7 @@ Tickets go to GitHub. That split is fixed; the team and the repo are not.
    `git remote -v` for the GitHub repo, `docs/agents/issue-tracker.md` for an
    existing configuration, and any `.env` or secrets file for a Linear key.
 
-2. Ask, in one message, for whatever is still missing:
+2. Ask for whatever is still missing, one question at a time through the `ask` skill:
    - the Linear team the specs belong to (key or name)
    - the GitHub repo the tickets belong to, as `owner/name`
    - whether this repo runs the fixed stack: Neon for the database, Clerk for

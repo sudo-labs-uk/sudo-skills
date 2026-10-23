@@ -51,14 +51,14 @@ function gateway({ agents = true } = {}) {
 
 test("the skill set is every directory holding a SKILL.md", () => {
   const names = skillNames(CORE);
-  for (const expected of ["audit", "code-review", "cut-release", "design-is", "grill-with-docs", "humanizer", "implement-spec", "improve-skill", "no-slop", "pathfinder", "pr", "show-me", "sudo-setup", "tdd", "to-spec", "to-tickets", "verify"]) {
+  for (const expected of ["ask", "audit", "code-review", "codebase-design", "cut-release", "design-is", "domain-modeling", "grill-with-docs", "grilling", "humanizer", "implement-spec", "improve-skill", "no-slop", "pathfinder", "pr", "show-me", "sudo-setup", "tdd", "to-spec", "to-tickets", "verify"]) {
     assert.ok(names.includes(expected), `${expected} missing from ${names.join(", ")}`);
   }
 });
 
 test("every vendored skill carries its licence and provenance", () => {
   const vendored = [
-    "code-review", "design-is", "grill-with-docs", "humanizer",
+    "code-review", "codebase-design", "design-is", "domain-modeling", "grill-with-docs", "grilling", "humanizer",
     "implement-spec", "no-slop", "pathfinder", "pr", "show-me", "tdd", "to-spec", "to-tickets",
   ];
   for (const name of vendored) {
@@ -69,6 +69,17 @@ test("every vendored skill carries its licence and provenance", () => {
   for (const name of ["design-is", "pathfinder"]) {
     assert.ok(existsSync(path.join(CORE, "skills", name, "NOTICE")), `${name} has no Apache notice`);
   }
+});
+
+test("every skill that puts a question to the user routes it through ask", () => {
+  for (const name of ["grilling", "grill-with-docs", "to-spec", "to-tickets", "design-is", "code-review", "tdd", "sudo-setup", "cut-release"]) {
+    const body = readFileSync(path.join(CORE, "skills", name, "SKILL.md"), "utf8");
+    assert.match(body, /`ask` skill/, `${name} asks the user without the ask skill`);
+  }
+  const grilling = readFileSync(path.join(CORE, "skills", "grilling", "SKILL.md"), "utf8");
+  assert.doesNotMatch(grilling, /Ask the whole frontier/, "grilling still asks a round at a time");
+  const setup = readFileSync(path.join(CORE, "skills", "sudo-setup", "SKILL.md"), "utf8");
+  assert.doesNotMatch(setup, /in one message/, "sudo-setup still asks everything in one message");
 });
 
 // -------------------------------------------------------------- Claude Code
