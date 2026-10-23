@@ -15,6 +15,6 @@ replaced by a merge from it; the commit above is the merge base.
 
 The check of test seams with the user goes through sudo's `ask` skill: one question at a time, interactive.
 
-Publishing goes to Linear rather than to whichever tracker a repo configured, and the setup skill named is `/sudo:setup` rather than `/setup-matt-pocock-skills`. Specs live in Linear and tickets live in GitHub; that split is sudo's, not the upstream's.
+Publishing goes to Linear rather than to whichever tracker a repo configured, and the setup skill named is `/sudo-skills:sudo-setup` rather than `/setup-matt-pocock-skills`. Specs live in Linear and tickets live in GitHub; that split is sudo's, not the upstream's.
 
 Everything else is byte-identical to the upstream commit named above.

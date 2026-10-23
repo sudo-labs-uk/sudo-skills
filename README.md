@@ -2,13 +2,15 @@
 
 ![What sudo is built on: a grafted tree. The stack it assumes is the soil, a pinned copy of a skill flow is the rootstock, five third-party skills are grafted onto it, sudo's carried and separately referenced skills grow in the canopy, and a dashed arrow marks the planned fork sync.](docs/images/what-sudo-is-built-on.svg)
 
-sudo holds the skills three agents use for product work. They read this directory,
-so editing a skill here changes what each agent runs in its next session.
+sudo holds the skills three agents use for product work. Claude Code loads them as the
+`sudo-skills` plugin, so every skill runs as `/sudo-skills:<name>`. The OpenClaw
+gateway reads this directory directly. A change merged into `main` reaches each agent
+in its next session.
 
 Any agent running a sudo skill can propose a change to it. The `improve-skill` skill
-turns a lesson from a session into a pull request against `main`, made from a worktree
-so the shared checkout every agent reads is never edited in place. A change reaches the
-agents once the maintainer merges it and the checkout pulls.
+turns a lesson from a session into a pull request against `main`, made in a fresh clone
+so neither the plugin cache nor the gateway's checkout is edited in place. A change
+reaches the agents once the maintainer merges it.
 
 Matt Pocock's skill flow is the rootstock, copied at a pinned upstream commit. Five
 skills from other makers are grafted onto it and keep their own licences. sudo's own
@@ -18,29 +20,43 @@ planned rather than shipped.
 
 ## Install
 
+### Claude Code
+
+sudo-skills is one of the plugins in the `sudo` marketplace, a catalog kept in
+`sudo-labs-uk/sudo-marketplace`:
+
+```sh
+claude plugin marketplace add sudo-labs-uk/sudo-marketplace
+claude plugin install sudo-skills@sudo
+```
+
+The plugin carries no version number, so each commit on `main` counts as a release.
+`claude plugin update sudo-skills@sudo` fetches the latest one, and turning on
+auto-update for the `sudo` marketplace in `/plugin` does the same in the background.
+To try an edit before it merges, start a session with `claude --plugin-dir` pointing at
+your checkout.
+
+Block separately installed copies of sudo's skills with a `Skill(...)` deny rule, such
+as `humanizer`, Compound Engineering's `ce-noslop` (sudo's `no-slop`), or a Matt
+Pocock plugin's `tdd`, `code-review` and `pr`. Otherwise both copies sit side by side
+under different prefixes.
+
+### OpenClaw
+
 ```sh
 node bin/sudo-skills.mjs install --dry-run   # report, write nothing
-node bin/sudo-skills.mjs install             # Claude Code and the OpenClaw gateway
+node bin/sudo-skills.mjs install             # the OpenClaw gateway
 node bin/sudo-skills.mjs status              # what is installed where
 ```
 
-The installer writes to two targets. It creates a symlink per skill in
-`~/.claude/skills` for Claude Code, plus a `sudo-install.json` naming the release.
-For the OpenClaw gateway it writes one load path pointing at this checkout and one
-entry listing the agents. That single entry gives the skills to every listed agent, so
+The installer writes one load path pointing at this checkout into the gateway config,
+and one entry listing the agents. That single entry gives the skills to every listed agent, so
 the installer writes nothing into any agent workspace.
 
 The installer changes nothing when run a second time and reports that result. It
 creates a dated backup beside any file it edits and changes only the keys it owns.
 Every other plugin's entry, every other load path and its position, and any disabled
-`sudo` entry all survive. It stops rather than overwriting a skill name already taken,
-and it stops if it cannot parse the gateway config.
-
-Disable or block separately installed copies of sudo's skills before installing it,
-such as `humanizer`, Compound Engineering's `ce-noslop` (sudo's `no-slop`), or a
-Matt Pocock plugin's `tdd`, `code-review` and `pr`. The installer catches a duplicate
-under `~/.claude/skills`, but a plugin exposes its copy under its own name without
-using that directory.
+`sudo` entry all survive. It stops if it cannot parse the gateway config.
 
 Passing `--agents` sets which agents the entry is for. A plain re-run keeps whatever
 list is already there and cannot widen one that was narrowed. The installer writes the
@@ -86,11 +102,12 @@ directories record the commit that a future fork will use as its merge base.
 npm test
 ```
 
-The tests check the links point back at this checkout, and that a second run and a dry
-run both write nothing. They also check what the installer must preserve: another
+The tests check that the plugin manifest names `sudo-skills` with no pinned version,
+that the installer writes no Claude Code skills, and that a second run and a dry run
+both write nothing. They also check what the installer must preserve: another
 plugin's entry and load-path order survive with a backup beside the file, a disabled
-entry stays disabled, an agent filter survives a plain re-run, a symlink config stays a
-symlink, and a skill directory created by someone else is never replaced. An
+entry stays disabled, an agent filter survives a plain re-run, and a symlink config stays a
+symlink. An
 unparseable config stops the install before any write. The command-line flags have
 their own tests; a mistyped `--dry-run` must stop the run rather than installing. A
 provenance test checks that every known vendored skill carries its licence and upstream

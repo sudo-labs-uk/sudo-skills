@@ -1,25 +1,26 @@
 #!/usr/bin/env node
-// sudo-skills — install this repo's skills into the runtimes on this machine.
+// sudo-skills — install this repo's skills into the OpenClaw gateway on this machine.
+// Claude Code installs them as a plugin instead: claude plugin install sudo-skills@sudo
 //
 //   sudo-skills install [--agents main,etch,icon] [--dry-run]
 //   sudo-skills install --status
-//   sudo-skills install claude-code openclaw
 //
-// The skills are linked, not copied, so an edit in this repo is the skill
+// The gateway loads the skills from this repo, so an edit here is the skill
 // every agent runs on its next session.
 
 import path from "node:path";
 import process from "node:process";
 import { existsSync } from "node:fs";
 import {
-  installClaudeCode, installOpenClaw, installStatus, agentCoverage,
-  claudeConfigDir, openclawConfigFile, skillNames,
+  installOpenClaw, installStatus, agentCoverage,
+  openclawConfigFile, skillNames,
   PLUGIN_ID, VERSION,
 } from "../lib/install.js";
 
 const CORE = path.resolve(import.meta.dirname, "..");
 const DEFAULT_AGENTS = ["main", "etch", "icon"];
-const TARGETS = new Set(["claude-code", "openclaw"]);
+const TARGETS = new Set(["openclaw"]);
+const CLAUDE_CODE = "Claude Code takes sudo-skills as a plugin: claude plugin install sudo-skills@sudo";
 const argv = process.argv.slice(2);
 
 const die = (message) => {
@@ -74,7 +75,6 @@ function agentIds() {
 /** Which runtimes are on this machine, so `install` with no target works. */
 function detect() {
   const found = [];
-  if (existsSync(claudeConfigDir())) found.push("claude-code");
   if (existsSync(openclawConfigFile())) found.push("openclaw");
   return found;
 }
@@ -112,9 +112,12 @@ function showStatus() {
 function install() {
   const dryRun = has("dry-run");
   const asked = words.slice(1);
-  for (const target of asked) if (!TARGETS.has(target)) die(`unknown target "${target}": use claude-code or openclaw`);
+  for (const target of asked) {
+    if (target === "claude-code") die(CLAUDE_CODE);
+    if (!TARGETS.has(target)) die(`unknown target "${target}": use openclaw`);
+  }
   const targets = asked.length ? asked : detect();
-  if (!targets.length) die("found no runtime to install into; pass claude-code or openclaw");
+  if (!targets.length) die(`found no OpenClaw gateway to install into. ${CLAUDE_CODE}`);
 
   // Only a run that named agents sends them, so a later plain run cannot widen
   // an entry the operator narrowed. The default applies to a first install.
@@ -126,9 +129,7 @@ function install() {
   let allOk = true;
   let gateway = null;
   for (const target of targets) {
-    if (target === "claude-code") {
-      allOk = report("claude-code", installClaudeCode({ core: CORE, dryRun }), dryRun) && allOk;
-    } else if (target === "openclaw") {
+    if (target === "openclaw") {
       gateway = installOpenClaw({ core: CORE, ...(named ? { agents: named } : {}), agentsDefault: DEFAULT_AGENTS, dryRun });
       allOk = report("openclaw", gateway, dryRun) && allOk;
     }
@@ -153,19 +154,19 @@ function install() {
 }
 
 function help() {
-  console.log(`sudo-skills ${VERSION} — install the sudo skills into this machine's runtimes
+  console.log(`sudo-skills ${VERSION} — install the sudo skills into this machine's OpenClaw gateway
 
-  sudo-skills install [<target>…]   claude-code, openclaw; both detected when none given
+  sudo-skills install [openclaw]    the gateway, detected when no target is given
       --agents <a,b,c>              which gateway agents the entry is for (default: ${DEFAULT_AGENTS.join(",")})
       --dry-run                     report the change and write nothing
       --status                      what is installed where
   sudo-skills status                the same report
   sudo-skills help
 
-Skills are linked from ${CORE}/skills, and the gateway entry points at the same
-directory, so editing a skill here changes it for every agent with no second
-install and no copy in any workspace. Nothing already in a skills directory is
-removed or overwritten: a name that is taken stops the install and says so.`);
+The gateway entry points at ${CORE}/skills, so editing a skill here changes it
+for every agent with no second install and no copy in any workspace.
+
+${CLAUDE_CODE}`);
 }
 
 const command = words[0] ?? "help";
