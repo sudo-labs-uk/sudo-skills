@@ -2,8 +2,8 @@
 // follows the same four rules: back up what it changes, change only the keys
 // sudo owns, do nothing on a second run, and write nothing under --dry-run.
 //
-// And one rule of sudo's own: skills are linked, never copied, so an edit in
-// this repo reaches every agent without a second install.
+// And one rule of sudo's own: the gateway loads skills from this repo, never a
+// copy, so an edit here reaches every gateway agent without a second install.
 
 import { test } from "node:test";
 import assert from "node:assert/strict";
@@ -14,7 +14,7 @@ import {
 import { tmpdir } from "node:os";
 import path from "node:path";
 import {
-  skillNames, installOpenClaw, agentCoverage, gatewayAgents, installStatus, PLUGIN_ID, VERSION,
+  skillNames, installOpenClaw, agentCoverage, gatewayAgents, installStatus, VERSION,
 } from "../lib/install.js";
 
 const CORE = path.resolve(import.meta.dirname, "..");

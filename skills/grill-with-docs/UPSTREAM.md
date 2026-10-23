@@ -13,4 +13,4 @@ replaced by a merge from it; the commit above is the merge base.
 
 ## What Sudo Labs changed
 
-One paragraph added: domain-modeling's challenges join grilling's frontier and go out one at a time through sudo's `ask` skill. Otherwise the file is byte-identical to the upstream commit named above.
+One paragraph added: domain-modeling's challenges join grilling's frontier and go out one at a time through sudo's `ask` skill. Skill names carry their Claude Code plugin prefix, such as `sudo-skills:grilling`, beside the bare name the OpenClaw gateway uses. Otherwise the file is byte-identical to the upstream commit named above.

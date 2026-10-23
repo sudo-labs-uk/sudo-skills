@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Break a plan, spec, or conversation into a set of **tickets**: tracer-bullet vertical slices, each declaring the tickets that **block** it.
 
-The ticket tracker is GitHub, and the spec tracker is Linear. The GitHub repo and the Linear team should have been provided to you. If not, tell the user to run `/sudo-skills:sudo-setup`.
+The ticket tracker is GitHub, and the spec tracker is Linear. The GitHub repo and the Linear team should have been provided to you. If not, tell the user to run `/sudo-skills:sudo-setup` (`/sudo-setup` on the OpenClaw gateway).
 
 ## Process
 

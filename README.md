@@ -4,8 +4,8 @@
 
 sudo holds the skills three agents use for product work. Claude Code loads them as the
 `sudo-skills` plugin, so every skill runs as `/sudo-skills:<name>`. The OpenClaw
-gateway reads this directory directly. A change merged into `main` reaches each agent
-in its next session.
+gateway reads this directory directly. A change merged into `main` reaches gateway
+agents in their next session, and Claude Code sessions once the plugin updates.
 
 Any agent running a sudo skill can propose a change to it. The `improve-skill` skill
 turns a lesson from a session into a pull request against `main`, made in a fresh clone
@@ -106,9 +106,8 @@ The tests check that the plugin manifest names `sudo-skills` with no pinned vers
 that the installer writes no Claude Code skills, and that a second run and a dry run
 both write nothing. They also check what the installer must preserve: another
 plugin's entry and load-path order survive with a backup beside the file, a disabled
-entry stays disabled, an agent filter survives a plain re-run, and a symlink config stays a
-symlink. An
-unparseable config stops the install before any write. The command-line flags have
-their own tests; a mistyped `--dry-run` must stop the run rather than installing. A
-provenance test checks that every known vendored skill carries its licence and upstream
-record, including the two Apache notices.
+entry stays disabled, an agent filter survives a plain re-run, and a symlink config
+stays a symlink. An unparseable config stops the install before any write. The
+command-line flags have their own tests; a mistyped `--dry-run` must stop the run
+rather than installing. A provenance test checks that every known vendored skill
+carries its licence and upstream record, including the two Apache notices.

@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 // sudo-skills — install this repo's skills into the OpenClaw gateway on this machine.
-// Claude Code installs them as a plugin instead: claude plugin install sudo-skills@sudo
 //
 //   sudo-skills install [--agents main,etch,icon] [--dry-run]
 //   sudo-skills install --status
@@ -124,7 +123,7 @@ function install() {
   const named = agentIds();
   const ids = named ?? DEFAULT_AGENTS;
   console.log(`${PLUGIN_ID} ${VERSION} from ${CORE}${dryRun ? " \u2014 dry run, nothing will be written" : ""}`);
-  console.log(`${skillNames(CORE).length} skills, linked rather than copied\n`);
+  console.log(`${skillNames(CORE).length} skills, loaded from this checkout\n`);
 
   let allOk = true;
   let gateway = null;

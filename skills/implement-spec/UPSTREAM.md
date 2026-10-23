@@ -14,7 +14,7 @@ replaced by a merge from it; the commit above is the merge base.
 ## What Sudo Labs changed
 
 The setup skill named is `/sudo-skills:sudo-setup` rather than `/setup-matt-pocock-skills`,
-and the Skill tool is called with `sudo-skills:tdd` and `sudo-skills:code-review`, the
-names those skills carry inside the `sudo-skills` plugin.
+and the Skill tool calls for `tdd` and `code-review` also give the `sudo-skills:` names
+those skills carry in Claude Code.
 
 Everything else is byte-identical to the upstream commit named above.

@@ -13,4 +13,4 @@ replaced by a merge from it; the commit above is the merge base.
 
 ## What Sudo Labs changed
 
-One line changed: instead of asking the user for the interface and the seams, the agent proposes them and confirms them as one question through sudo's `ask` skill. Otherwise the file is byte-identical to the upstream commit named above.
+One line changed: instead of asking the user for the interface and the seams, the agent proposes them and confirms them as one question through sudo's `ask` skill. Skill names carry their Claude Code plugin prefix, such as `sudo-skills:grilling`, beside the bare name the OpenClaw gateway uses. Otherwise the file is byte-identical to the upstream commit named above.

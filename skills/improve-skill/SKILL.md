@@ -7,7 +7,7 @@ description: "Turn a lesson about a sudo skill into a pull request on the sudo r
 
 Claude Code reads the sudo skills from the `sudo-skills` plugin, and the OpenClaw
 gateway reads them from one shared checkout of the sudo repo. A change merged into the
-repo's `main` reaches every agent on its next session. That reach is why a change lands
+repo's `main` reaches every agent once the plugin updates or the checkout pulls. That reach is why a change lands
 only as a pull request the maintainer merges, and why the directory this skill loaded
 from stays untouched: you edit in a clone of your own.
 
@@ -72,8 +72,9 @@ Each command below may run in a fresh shell, so write the path out in full where
    you that directory in place of a link.
 
 6. Clean up and report. Delete `<wt>`, keeping any `<wt>.patches` directory. Give the
-   person operating you the pull request link or the patch directory. The maintainer merges; the change reaches agents after that.
-   For the rest of this session, carry on with the corrected behaviour.
+   person operating you the pull request link or the patch directory. The maintainer
+   merges; the change reaches agents after that. For the rest of this session, carry on
+   with the corrected behaviour.
 
 Done means: the change sits in an open pull request against `main` (or in a patch
 directory the person operating you has), `npm test` passed on it, and nothing outside
