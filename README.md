@@ -5,6 +5,11 @@
 sudo holds the skills three agents use for product work. They read this directory,
 so editing a skill here changes what each agent runs in its next session.
 
+Any agent running a sudo skill can propose a change to it. The `improve-skill` skill
+turns a lesson from a session into a pull request against `main`, made from a worktree
+so the shared checkout every agent reads is never edited in place. A change reaches the
+agents once the maintainer merges it and the checkout pulls.
+
 Matt Pocock's skill flow is the rootstock, copied at a pinned upstream commit. Five
 skills from other makers are grafted onto it and keep their own licences. sudo's own
 skills are the new growth at the top. The stack sudo assumes is the ground. A fork
@@ -45,16 +50,18 @@ Seven come from Matt Pocock's set (MIT): `grill-with-docs`, `to-spec`, `to-ticke
 `implement-spec`, `tdd`, `code-review`, `pr`. sudo's copies write specs to Linear
 and open tickets as GitHub issues that reference the spec.
 
-Five are copied from other makers, unchanged. `design-is` and `pathfinder` come from
+Five are copied from other makers. `design-is` and `pathfinder` come from
 claude-mem (Apache-2.0), `show-me` from HumanLayer (MIT). Two more cover prose:
 `humanizer` (MIT) removes AI writing patterns from a draft, and `no-slop` (MIT)
 tests each sentence for clarity. The planned product-work sequence will require both
-passes before a spec, ticket, PR body or repository document is published.
+passes before a spec, ticket, PR body or repository document is published. Each
+skill's `UPSTREAM.md` lists what sudo changed, if anything.
 
-Four are sudo's own: `sudo-setup` configures a repo's Linear team and GitHub repo
+Five are sudo's own: `sudo-setup` configures a repo's Linear team and GitHub repo
 once, `verify` drives the running app and screenshots what a user sees, `audit` checks
-a finished change against its ticket's acceptance criteria from a fresh session, and
-`cut-release` tags and publishes.
+a finished change against its ticket's acceptance criteria from a fresh session,
+`cut-release` tags and publishes, and `improve-skill` turns a lesson about any of
+these skills into a pull request on this repo.
 
 Impeccable, `agent-problem-solving` and `cairn` are installed separately. See
 [docs/referenced-plugins.md](docs/referenced-plugins.md) for the reason in each case.
