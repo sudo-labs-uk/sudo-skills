@@ -2,20 +2,19 @@
 // follows the same four rules: back up what it changes, change only the keys
 // sudo owns, do nothing on a second run, and write nothing under --dry-run.
 //
-// And one rule of sudo's own: skills are linked, never copied, so an edit in
-// this repo reaches every agent without a second install.
+// And one rule of sudo's own: the gateway loads skills from this repo, never a
+// copy, so an edit here reaches every gateway agent without a second install.
 
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   mkdtempSync, mkdirSync, writeFileSync, readFileSync, existsSync,
-  readdirSync, lstatSync, readlinkSync, symlinkSync, renameSync,
+  readdirSync, lstatSync, symlinkSync, renameSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import {
-  skillNames, linkSkills, installClaudeCode, installOpenClaw,
-  agentCoverage, gatewayAgents, installStatus, PLUGIN_ID, VERSION,
+  skillNames, installOpenClaw, agentCoverage, gatewayAgents, installStatus, VERSION,
 } from "../lib/install.js";
 
 const CORE = path.resolve(import.meta.dirname, "..");
@@ -82,60 +81,12 @@ test("every skill that puts a question to the user routes it through ask", () =>
   assert.doesNotMatch(setup, /in one message/, "sudo-setup still asks everything in one message");
 });
 
-// -------------------------------------------------------------- Claude Code
-
-test("Claude Code gets a link to every skill, pointing back at this repo", () => {
-  const dir = temp("cc");
-  const r = installClaudeCode({ core: CORE, configDir: dir });
-  assert.equal(r.ok, true);
-  assert.equal(r.changed, true);
-  const linked = readdirSync(path.join(dir, "skills")).sort();
-  assert.deepEqual(linked, skillNames(CORE));
-  for (const name of linked) {
-    const link = path.join(dir, "skills", name);
-    assert.ok(lstatSync(link).isSymbolicLink(), `${name} is a copy, not a link`);
-    assert.equal(readlinkSync(link), path.join(CORE, "skills", name));
+test("the Claude Code plugin is sudo-skills and carries no version, so every commit is a release", () => {
+  for (const file of [".claude-plugin/plugin.json", "plugin.json"]) {
+    const manifest = json(path.join(CORE, file));
+    assert.equal(manifest.name, "sudo-skills", `${file} names the plugin ${manifest.name}`);
+    assert.equal(manifest.version, undefined, `${file} pins a version, so installs stop updating`);
   }
-});
-
-test("Claude Code records which release is installed", () => {
-  const dir = temp("cc");
-  installClaudeCode({ core: CORE, configDir: dir });
-  const record = json(path.join(dir, "sudo-install.json"));
-  assert.equal(record.plugin, PLUGIN_ID);
-  assert.equal(record.version, VERSION);
-  assert.equal(record.core, CORE);
-});
-
-test("a second Claude Code run changes nothing and says so", () => {
-  const dir = temp("cc");
-  installClaudeCode({ core: CORE, configDir: dir });
-  const again = installClaudeCode({ core: CORE, configDir: dir });
-  assert.equal(again.ok, true);
-  assert.equal(again.changed, false);
-  assert.deepEqual(again.wrote, []);
-});
-
-test("a Claude Code dry run reports the links and writes nothing", () => {
-  const dir = temp("cc");
-  const r = installClaudeCode({ core: CORE, configDir: dir, dryRun: true });
-  assert.equal(r.ok, true);
-  assert.equal(r.changed, true);
-  assert.ok(r.wrote.length > skillNames(CORE).length - 1);
-  assert.equal(existsSync(path.join(dir, "skills")), false);
-  assert.equal(existsSync(path.join(dir, "sudo-install.json")), false);
-});
-
-test("a skill name already taken by something else stops the install", () => {
-  const dir = temp("cc");
-  mkdirSync(path.join(dir, "skills", "verify"), { recursive: true });
-  writeFileSync(path.join(dir, "skills", "verify", "SKILL.md"), "someone else's\n");
-  const r = installClaudeCode({ core: CORE, configDir: dir });
-  assert.equal(r.ok, false);
-  assert.match(r.reason, /verify/);
-  // Nothing was half-installed beside it.
-  assert.deepEqual(readdirSync(path.join(dir, "skills")), ["verify"]);
-  assert.equal(readFileSync(path.join(dir, "skills", "verify", "SKILL.md"), "utf8"), "someone else's\n");
 });
 
 // ----------------------------------------------------------------- OpenClaw
@@ -251,68 +202,18 @@ test("the installer writes nothing into any agent workspace", () => {
 
 test("status reads what is in place from the files themselves", () => {
   const { file } = gateway();
-  const cc = temp("cc");
-  const before = installStatus({ core: CORE, configFile: file, configDir: cc, ids: ["main", "etch"] });
+  const before = installStatus({ core: CORE, configFile: file, ids: ["main", "etch"] });
   assert.equal(before.find((r) => r.runtime === "openclaw").installed, false);
-  assert.equal(before.find((r) => r.runtime === "claude-code").installed, false);
 
   installOpenClaw({ core: CORE, configFile: file, agents: ["main", "etch"] });
-  installClaudeCode({ core: CORE, configDir: cc });
-  const after = installStatus({ core: CORE, configFile: file, configDir: cc, ids: ["main", "etch"] });
+  const after = installStatus({ core: CORE, configFile: file, ids: ["main", "etch"] });
   assert.equal(after.find((r) => r.runtime === "openclaw").installed, true);
   assert.equal(after.find((r) => r.runtime === "openclaw").release, VERSION);
-  assert.equal(after.find((r) => r.runtime === "claude-code").installed, true);
   const agents = after.filter((r) => r.runtime === "agent");
   assert.deepEqual(agents.map((r) => [r.agent, r.installed]), [["main", true], ["etch", true]]);
 });
 
-// ------------------------------------------------------- linking, on its own
-
-test("linkSkills refuses a link that points somewhere else and writes nothing", () => {
-  const dir = temp("link");
-  mkdirSync(dir, { recursive: true });
-  const r = linkSkills(CORE, dir);
-  assert.equal(r.changed, true);
-  assert.deepEqual(r.conflicts, []);
-  const second = linkSkills(CORE, dir);
-  assert.equal(second.changed, false);
-});
-
 // ------------------------------------------- what an install must not break
-
-test("a link pointing at something else stops the install, and nothing is written", () => {
-  const dir = temp("link");
-  const elsewhere = temp("other");
-  symlinkSync(elsewhere, path.join(dir, "verify"));
-  const r = linkSkills(CORE, dir);
-  assert.equal(r.changed, false);
-  assert.deepEqual(r.wrote, []);
-  assert.equal(r.conflicts.length, 1);
-  assert.match(r.conflicts[0], /verify is a link to/);
-  assert.deepEqual(readdirSync(dir), ["verify"], "nothing else was linked beside it");
-  assert.equal(readlinkSync(path.join(dir, "verify")), elsewhere);
-});
-
-test("a link to another checkout of sudo is replaced by one to this checkout", () => {
-  const dir = temp("link");
-  const old = temp("old-checkout");
-  mkdirSync(path.join(old, "skills", "verify"), { recursive: true });
-  writeFileSync(path.join(old, "package.json"), '{"name":"sudo-skills"}\n');
-  symlinkSync(path.join(old, "skills", "verify"), path.join(dir, "verify"));
-  const r = linkSkills(CORE, dir);
-  assert.equal(r.ok ?? true, true);
-  assert.deepEqual(r.conflicts, []);
-  assert.equal(readlinkSync(path.join(dir, "verify")), path.join(CORE, "skills", "verify"));
-});
-
-test("a relative link is judged against its own directory, not the current one", () => {
-  const dir = temp("link");
-  mkdirSync(path.join(dir, "elsewhere"), { recursive: true });
-  symlinkSync("./elsewhere", path.join(dir, "verify"));
-  const r = linkSkills(CORE, dir);
-  assert.equal(r.changed, false);
-  assert.match(r.conflicts[0], /verify is a link to/);
-});
 
 test("a load path already in place keeps its position, so no other plugin is reordered", () => {
   const { file } = gateway();

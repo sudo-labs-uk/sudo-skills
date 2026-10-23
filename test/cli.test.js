@@ -80,15 +80,23 @@ test("a dry run against a disabled entry says the install keeps it disabled", ()
   assert.match(r.stdout, /the entry is disabled, and this install keeps it disabled/);
 });
 
-test("install writes the links and the gateway entry, and a second run changes nothing", () => {
+test("install writes the gateway entry and no Claude Code skills, and a second run changes nothing", () => {
   const m = machine();
   const first = run(m, "install");
   assert.equal(first.status, 0, first.stderr);
-  assert.ok(readdirSync(path.join(m.claude, "skills")).includes("verify"));
+  assert.equal(existsSync(path.join(m.claude, "skills")), false, "Claude Code got bare skill links");
   assert.equal(entry(m).enabled, true);
   assert.deepEqual(entry(m).config.agents, ["main", "etch", "icon"]);
 
   const second = run(m, "install");
   assert.equal(second.status, 0);
-  assert.equal((second.stdout.match(/already installed, nothing to change/g) ?? []).length, 2);
+  assert.equal((second.stdout.match(/already installed, nothing to change/g) ?? []).length, 1);
+});
+
+test("asking for the claude-code target points at the plugin install", () => {
+  const m = machine();
+  const r = run(m, "install", "claude-code");
+  assert.equal(r.status, 2);
+  assert.match(r.stderr, /claude plugin install sudo-skills@sudo/);
+  assert.equal(existsSync(path.join(m.claude, "skills")), false);
 });

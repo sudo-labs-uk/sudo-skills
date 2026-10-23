@@ -15,6 +15,6 @@ replaced by a merge from it; the commit above is the merge base.
 
 The quiz on the breakdown asks its three questions one at a time through sudo's `ask` skill.
 
-Publishing goes to GitHub issues rather than to whichever tracker a repo configured, with local files kept only as the no-remote fallback; a ticket now also references the Linear spec it came from, and the setup skill named is `/sudo:setup`.
+Publishing goes to GitHub issues rather than to whichever tracker a repo configured, with local files kept only as the no-remote fallback; a ticket now also references the Linear spec it came from, and the setup skill named is `/sudo-skills:sudo-setup`.
 
 Everything else is byte-identical to the upstream commit named above.

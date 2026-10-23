@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 This skill takes the current conversation context and codebase understanding and produces a spec. Do NOT interview the user; just synthesize what you already know.
 
-The spec tracker is Linear, and the ticket tracker is GitHub. The Linear team and the GitHub repo should have been provided to you. If not, tell the user to run `/sudo:setup`.
+The spec tracker is Linear, and the ticket tracker is GitHub. The Linear team and the GitHub repo should have been provided to you. If not, tell the user to run `/sudo-skills:sudo-setup` (`/sudo-setup` on the OpenClaw gateway).
 
 ## Process
 

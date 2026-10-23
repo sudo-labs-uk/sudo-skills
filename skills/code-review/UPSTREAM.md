@@ -15,6 +15,6 @@ replaced by a merge from it; the commit above is the merge base.
 
 Asking where the spec is goes through sudo's `ask` skill.
 
-The setup skill named is `/sudo:setup` rather than `/setup-matt-pocock-skills`.
+The setup skill named is `/sudo-skills:sudo-setup` rather than `/setup-matt-pocock-skills`.
 
 Everything else is byte-identical to the upstream commit named above.

@@ -5,11 +5,11 @@ description: "Turn a lesson about a sudo skill into a pull request on the sudo r
 
 # Improve a skill
 
-Every agent that runs a sudo skill reads it from one shared checkout of the sudo
-repo, through a symlink or a gateway load path. A change merged into the repo's
-`main` reaches every agent on its next session. That reach is why a change lands only
-as a pull request the maintainer merges, and why the shared checkout stays untouched:
-you edit in a worktree of your own.
+Claude Code reads the sudo skills from the `sudo-skills` plugin, and the OpenClaw
+gateway reads them from one shared checkout of the sudo repo. A change merged into the
+repo's `main` reaches every agent once the plugin updates or the checkout pulls. That reach is why a change lands
+only as a pull request the maintainer merges, and why the directory this skill loaded
+from stays untouched: you edit in a clone of your own.
 
 A lesson is something you observed while running a skill: a step that was wrong, a
 gap you filled with your own judgement, a command that no longer works, a rule the
@@ -23,25 +23,20 @@ process. One lesson per pull request.
 
 ## Process
 
-Each command below may run in a fresh shell, so write the paths out in full wherever
-`<repo>` and `<wt>` appear.
+Each command below may run in a fresh shell, so write the path out in full wherever
+`<wt>` appears.
 
-1. Find the repo. Start from this skill's base directory: Claude Code prints it when
-   the skill loads; elsewhere, use the directory holding this `SKILL.md`. Run
-   `git -C <base directory> rev-parse --show-toplevel` and use what it prints as
-   `<repo>`. Then record `git -C <repo> status --short`; it must read the same at the
-   end.
-
-2. Open a worktree off `origin/main`, with `<wt>` a new directory under your temp
-   directory, such as `/tmp/sudo-skills-<slug>`:
+1. Clone the repo into `<wt>`, a new directory under your temp directory such as
+   `/tmp/sudo-skills-<slug>`, and branch off `main`:
 
    ```sh
-   git -C <repo> fetch origin && git -C <repo> worktree add <wt> -b skill/<slug> origin/main
+   git clone https://github.com/sudo-labs-uk/sudo-skills <wt> && git -C <wt> switch -c skill/<slug>
    ```
 
-   Every edit from here on happens under `<wt>`.
+   Every edit from here on happens under `<wt>`. The directory this skill loaded from
+   is the plugin cache or the gateway's shared checkout; never edit either.
 
-3. Make the smallest edit that would have prevented the lesson. Write it as an
+2. Make the smallest edit that would have prevented the lesson. Write it as an
    instruction to the next agent, stating the behaviour you want. Change only the skill
    the lesson is about.
 
@@ -49,7 +44,7 @@ Each command below may run in a fresh shell, so write the paths out in full wher
    change to its "What Sudo Labs changed" section, so a later upstream merge can tell
    sudo's edits from upstream's.
 
-4. When the change adds a skill, add its name to the skill-set test in
+3. When the change adds a skill, add its name to the skill-set test in
    `test/install.test.js` and to the skill list in `README.md`. An adopted upstream
    skill also follows the README's "Vendored work" section and goes into the test's
    vendored list (and its Apache `NOTICE` list for Apache-2.0 work). Take another of
@@ -58,9 +53,9 @@ Each command below may run in a fresh shell, so write the paths out in full wher
    skill the new one replaces (for example `mattpocock-skills:grilling`), so the
    maintainer can block that copy.
 
-5. Run `npm test` in `<wt>`. It passes before you commit.
+4. Run `npm test` in `<wt>`. It passes before you commit.
 
-6. Commit, push and open the pull request. Write the body to a file first: which skill
+5. Commit, push and open the pull request. Write the body to a file first: which skill
    changed, what happened in the session (the step, what the skill told you, what
    turned out to be true), and what the edit changes. Pass it through `humanizer`, then
    `no-slop`.
@@ -76,12 +71,11 @@ Each command below may run in a fresh shell, so write the paths out in full wher
    `git -C <wt> format-patch origin/main -o <wt>.patches` and hand the person operating
    you that directory in place of a link.
 
-7. Clean up and report. Run `git -C <repo> worktree remove <wt>`, then
-   `git -C <repo> branch -D skill/<slug>`, and check that `git -C <repo> status --short`
-   reads as it did in step 1. Give the person operating you the pull request link or
-   the patch directory. The maintainer merges; the change reaches agents after that.
-   For the rest of this session, carry on with the corrected behaviour.
+6. Clean up and report. Delete `<wt>`, keeping any `<wt>.patches` directory. Give the
+   person operating you the pull request link or the patch directory. The maintainer
+   merges; the change reaches agents after that. For the rest of this session, carry on
+   with the corrected behaviour.
 
 Done means: the change sits in an open pull request against `main` (or in a patch
-directory the person operating you has), `npm test` passed on it, and the shared
-checkout has no new branch, worktree or edit.
+directory the person operating you has), `npm test` passed on it, and nothing outside
+`<wt>` was edited.
