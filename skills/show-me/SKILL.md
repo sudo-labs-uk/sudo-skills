@@ -1,7 +1,6 @@
 ---
 name: show-me
-description: Help the user understand the current topic visually with concise diagrams, code-shape sketches, and focused HTML artifacts.
-disable-model-invocation: true
+description: Help the user understand the current topic visually with concise diagrams, code-shape sketches, and focused HTML artifacts. Use when a diagram, call tree, component sketch or UI mock would explain the current topic faster than prose.
 ---
 
 Help the user understand the current topic of conversation visually. Skip the preamble and keep prose brief. Pick the smallest view that makes the key point clear.
@@ -115,7 +114,7 @@ function expandSkill(command: string): string {
 }
 ```
 
-- For a visual UI, layout, state comparison, or concept too dense for Mermaid, write one focused HTML file — a diagram, an infographic, or a short slide deck, whichever fits the point. Match the product's colors, type, spacing, and components; use real labels and data; support desktop and mobile. Then open it for the user:
+- For a visual UI, layout, state comparison, or concept too dense for Mermaid, make one focused HTML page — a diagram, an infographic, or a short slide deck, whichever fits the point. Match the product's colors, type, spacing, and components; use real labels and data; support desktop and mobile. Publish it with the Artifact tool when the session has one and share its link; otherwise write it to a file and open it for the user:
 
 ```
 Bash(open path/to/show-me-{description}.html)

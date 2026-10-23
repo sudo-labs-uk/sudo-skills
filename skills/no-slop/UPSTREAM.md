@@ -10,8 +10,10 @@ This skill is a vendored copy of third-party work.
 
 ## What Sudo Labs changed
 
-`SKILL.md` and both files under `references/` are byte-identical to the upstream
-commit named above. Sudo Labs added this file and `LICENSE`, and nothing else.
+Both files under `references/` are byte-identical to the upstream commit named
+above. The directory is renamed from `ce-noslop`, and `SKILL.md` differs only in its
+`name:` line, which reads `no-slop` in place of `ce-noslop`. Sudo Labs added this file
+and `LICENSE`, and nothing else.
 
 Note for a session: the skill points at `ce-promote` for marketing copy. That is
 another skill in the same upstream plugin and is not part of sudo, so a session
