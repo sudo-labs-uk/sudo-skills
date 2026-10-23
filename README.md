@@ -31,7 +31,7 @@ Every other plugin's entry, every other load path and its position, and any disa
 `sudo` entry all survive. It stops rather than overwriting a skill name already taken,
 and it stops if it cannot parse the gateway config.
 
-Disable separately installed copies of `humanizer` or `ce-noslop` before installing
+Disable separately installed copies of `humanizer` or `no-slop` before installing
 sudo. The installer catches a duplicate under `~/.claude/skills`, but a separately
 loaded plugin can expose the same name without using that directory.
 
@@ -47,7 +47,7 @@ and open tickets as GitHub issues that reference the spec.
 
 Five are copied from other makers, unchanged. `design-is` and `pathfinder` come from
 claude-mem (Apache-2.0), `show-me` from HumanLayer (MIT). Two more cover prose:
-`humanizer` (MIT) removes AI writing patterns from a draft, and `ce-noslop` (MIT)
+`humanizer` (MIT) removes AI writing patterns from a draft, and `no-slop` (MIT)
 tests each sentence for clarity. The planned product-work sequence will require both
 passes before a spec, ticket, PR body or repository document is published.
 
