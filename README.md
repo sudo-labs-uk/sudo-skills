@@ -36,9 +36,11 @@ Every other plugin's entry, every other load path and its position, and any disa
 `sudo` entry all survive. It stops rather than overwriting a skill name already taken,
 and it stops if it cannot parse the gateway config.
 
-Disable separately installed copies of `humanizer` or `no-slop` before installing
-sudo. The installer catches a duplicate under `~/.claude/skills`, but a separately
-loaded plugin can expose the same name without using that directory.
+Disable or block separately installed copies of sudo's skills before installing it,
+such as `humanizer`, Compound Engineering's `ce-noslop` (sudo's `no-slop`), or a
+Matt Pocock plugin's `tdd`, `code-review` and `pr`. The installer catches a duplicate
+under `~/.claude/skills`, but a plugin exposes its copy under its own name without
+using that directory.
 
 Passing `--agents` sets which agents the entry is for. A plain re-run keeps whatever
 list is already there and cannot widen one that was narrowed. The installer writes the

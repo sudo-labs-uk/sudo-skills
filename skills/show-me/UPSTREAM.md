@@ -12,7 +12,8 @@ This skill is a vendored copy of third-party work.
 `SKILL.md` has two changes; every other file is byte-identical to the upstream commit
 named above.
 
-- The `disable-model-invocation: true` line is removed, so an agent can reach the skill
-  on its own when a diagram would answer the question faster than prose.
+- The `disable-model-invocation: true` line is removed, and the description gains a
+  "Use when" sentence, so an agent can reach the skill on its own when a diagram would
+  answer the question faster than prose.
 - The HTML bullet publishes the page with the Artifact tool when the session has one,
   and falls back to upstream's write-and-open step when it does not.
