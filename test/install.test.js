@@ -51,7 +51,7 @@ function gateway({ agents = true } = {}) {
 
 test("the skill set is every directory holding a SKILL.md", () => {
   const names = skillNames(CORE);
-  for (const expected of ["ask", "audit", "code-review", "codebase-design", "cut-release", "design-is", "domain-modeling", "grill-with-docs", "grilling", "humanizer", "implement-spec", "improve-skill", "no-slop", "pathfinder", "pr", "show-me", "sudo-setup", "tdd", "to-spec", "to-tickets", "verify"]) {
+  for (const expected of ["ask", "audit", "code-review", "codebase-design", "cut-release", "design-is", "domain-modeling", "grill-with-docs", "grilling", "humanizer", "implement-spec", "improve-skill", "no-slop", "pathfinder", "pr", "show-me", "stop-slop", "sudo-setup", "tdd", "to-spec", "to-tickets", "verify"]) {
     assert.ok(names.includes(expected), `${expected} missing from ${names.join(", ")}`);
   }
 });
@@ -59,7 +59,7 @@ test("the skill set is every directory holding a SKILL.md", () => {
 test("every vendored skill carries its licence and provenance", () => {
   const vendored = [
     "code-review", "codebase-design", "design-is", "domain-modeling", "grill-with-docs", "grilling", "humanizer",
-    "implement-spec", "no-slop", "pathfinder", "pr", "show-me", "tdd", "to-spec", "to-tickets",
+    "implement-spec", "no-slop", "pathfinder", "pr", "show-me", "stop-slop", "tdd", "to-spec", "to-tickets",
   ];
   for (const name of vendored) {
     const dir = path.join(CORE, "skills", name);
