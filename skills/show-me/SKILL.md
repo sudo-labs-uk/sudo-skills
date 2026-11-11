@@ -114,11 +114,40 @@ function expandSkill(command: string): string {
 }
 ```
 
-- For a visual UI, layout, state comparison, or concept too dense for Mermaid, make one focused HTML page — a diagram, an infographic, or a short slide deck, whichever fits the point. Match the product's colors, type, spacing, and components; use real labels and data; support desktop and mobile. Publish it with the Artifact tool when the session has one and share its link; otherwise write it to a file and open it for the user:
+- For a visual UI, layout, state comparison, or concept too dense for Mermaid, make one focused HTML page — a diagram, an infographic, or a short slide deck, whichever fits the point. Match the product's colors, type, spacing, and components; use real labels and data; support desktop and mobile. Show it as "render it where the user is" says.
 
+### render it where the user is
+
+Pseudocode, call trees, component and file trees, diffs and code are plain text: put them in the reply, where every surface shows them as code blocks. Mermaid and HTML need something to draw them, and a terminal draws neither, so route those by the surface the session runs on. Check the surface once per session:
+
+```sh
+echo "entry=${CLAUDE_CODE_ENTRYPOINT:-} cmux=${CMUX_WORKSPACE_ID:+yes} ssh=${SSH_CONNECTION:+yes}"
 ```
-Bash(open path/to/show-me-{description}.html)
+
+Take the first row that matches:
+
+| Surface | Signal | Show Mermaid and HTML by |
+|---|---|---|
+| Claude desktop app, claude.ai, or a remote shell | `entry=claude-desktop`, `entry=remote` or `ssh=yes` | Publishing the page with the Artifact tool and sharing its link. With no Artifact tool, the desktop app falls through to the last row; claude.ai and a remote shell put the Mermaid block in the reply and give the HTML file's path. |
+| cmux | `entry=cli` and `cmux=yes` | Opening the page in a browser pane beside the session: `cmux browser open "file://<absolute path>" --focus false`. |
+| IDE extension or any other terminal | anything else | Opening the page in the default browser: `open <path>` on macOS, `xdg-open <path>` on Linux, `start "" <path>` on Windows. |
+
+Write the page to the session's scratchpad directory when it has one, otherwise to `${TMPDIR:-/tmp}`, named `show-me-<topic>.html`. A Mermaid diagram becomes a page by wrapping it in this template, with `&` and `<` in the diagram written as `&amp;` and `&lt;`:
+
+```html
+<!doctype html>
+<html><head><meta charset="utf-8"><title>{topic}</title>
+<style>:root{color-scheme:light dark}body{margin:24px;font:15px system-ui;background:Canvas;color:CanvasText}</style>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script></head>
+<body><h1>{topic}</h1><p>{one line on what the diagram shows}</p>
+<pre class="mermaid">
+{diagram}
+</pre>
+<script>mermaid.initialize({startOnLoad:true,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'default'})</script>
+</body></html>
 ```
+
+In cmux, confirm the diagram drew before telling the user: `cmux browser --surface <ref from browser open> eval "document.querySelector('.mermaid svg') ? 'ok' : 'not rendered'"` prints `ok`. On `not rendered`, wait two seconds and run it once more; a second failure means the diagram has a syntax error to fix. Once a view opens outside the reply, the reply holds the short text and says where the view is (pane, link or path).
 
 ### guidance
 
