@@ -71,11 +71,12 @@ and `pr`. sudo's copies write specs to Linear
 and open tickets as GitHub issues that reference the spec, and they ask the user one
 question at a time.
 
-Five are copied from other makers. `design-is` and `pathfinder` come from
-claude-mem (Apache-2.0), `show-me` from HumanLayer (MIT). Two more cover prose:
-`humanizer` (MIT) removes AI writing patterns from a draft, and `no-slop` (MIT)
-tests each sentence for clarity. The planned product-work sequence will require both
-passes before a spec, ticket, PR body or repository document is published. Each
+Six are copied from other makers. `design-is` and `pathfinder` come from
+claude-mem (Apache-2.0), `show-me` from HumanLayer (MIT). Three more cover prose:
+`humanizer` (MIT) removes AI writing patterns from a draft, `no-slop` (MIT) tests
+each sentence for clarity, and `stop-slop` (MIT) holds terse, direct prose rules to
+draft against. The planned product-work sequence will require the `humanizer` and
+`no-slop` passes before a spec, ticket, PR body or repository document is published. Each
 skill's `UPSTREAM.md` lists what sudo changed, if anything.
 
 Six are sudo's own. `ask` sets how every skill puts a question to the user: one
